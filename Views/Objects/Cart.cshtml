@@ -1,0 +1,55 @@
+@model List<Oggetti_Usati.Models.Oggetto>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <!-- Aggiungi il pulsante per effettuare l'acquisto -->
+    <div>
+        <button onclick="effettuaAcquisto()" class="btn btn-success">Effettua Acquisto</button>
+    </div>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+@section scripts {
+    <script>
+        function effettuaAcquisto() {
+             $.post('@Url.Action("EffettuaAcquisto", "Objects")',
+                 function(data) {
+                if (data.success) {
+                    alert("Acquisto effettuato con successo!");
+                    window.location.href = '@Url.Action("IndexAuth", "Home")';
+                } else {
+                    alert("Errore durante l'acquisto. Riprova più tardi.");
+                }
+            });
+        }
+    </script>
+}

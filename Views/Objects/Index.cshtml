@@ -1,0 +1,68 @@
+@model IEnumerable<Oggetti_Usati.Models.Oggetto>
+
+@{
+    ViewData["Title"] = "LISTA PRODOTTI";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                <form method="post" action="@Url.Action("TransferToCart", "Objects")">
+                    <input type="hidden" name="selectedIds" value="@item.Id" />
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    // Create a list to store selected IDs
+    List<int> selectedIds = new List<int>();
+
+    // Loop through each item in the Model and add its ID to the list
+    foreach (var item in Model)
+    {
+        selectedIds.Add(item.Id);
+    }
+}
+
+<form method="post" action="@Url.Action("TransferToCart", "Objects")">
+    <input type="hidden" name="selectedIds" value="@string.Join(",", selectedIds)" />
+    <button type="submit" class="btn btn-primary">Add All to Cart</button>
+</form>

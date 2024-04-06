@@ -1,0 +1,37 @@
+@section scripts {
+    <script>
+        function transfer() {
+            // Ottieni tutti gli ID degli oggetti dalla tabella
+            var objectIds = [];
+            $('table tbody tr').each(function() {
+                var objectId = $(this).find('td:first').text(); // Assumendo che il primo TD contenga l'ID dell'oggetto
+                objectIds.push(objectId);
+            });
+
+            // Invia i dati al controller
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("TransferToCart", "Objects")',
+                data: { objectIds: objectIds },
+                traditional: true, // Consente di inviare un array come dati POST
+                success: function(response) {
+                    // Controlla se il carrello contiene oggetti dopo il trasferimento
+                    if (response.success && response.itemCount > 0) {
+                        // Messaggio di conferma se l'ordine è andato a buon fine
+                        alert('L\'ordine è stato aggiunto al carrello con successo!');
+                    } else {
+                        // Messaggio di errore se il carrello è vuoto dopo il trasferimento
+                        alert('Errore: Il carrello è vuoto. Aggiungi almeno un oggetto al carrello.');
+                    }
+                    // Opzionale: puoi reindirizzare l'utente alla pagina del carrello
+                    window.location.href = '@Url.Action("Cart", "Home")';
+                },
+                error: function(xhr, status, error) {
+                    // Gestisci gli errori qui
+                    console.error(error);
+                    alert('Errore durante il trasferimento dei dati al carrello.');
+                }
+            });
+        }
+    </script>
+}

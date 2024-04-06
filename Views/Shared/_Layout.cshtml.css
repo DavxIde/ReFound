@@ -1,0 +1,80 @@
+﻿/* Stile del corpo della pagina */
+body {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Stile del contenitore principale */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Stile del titolo della pagina */
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Stile delle card per gli oggetti in vendita */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Stile dell'immagine dell'oggetto */
+.card-img-top {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Stile del corpo della card */
+.card-body {
+  padding: 20px;
+}
+
+/* Stile del titolo dell'oggetto */
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Stile della descrizione dell'oggetto */
+.card-text {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* Stile del prezzo dell'oggetto */
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Stile del pulsante per visualizzare i dettagli dell'oggetto */
+.btn-details {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-details:hover {
+  background-color: #0056b3;
+}
